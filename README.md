@@ -1,4 +1,4 @@
-# flake8-datetimez
+# git-archiver
 
 A simple webserver to make an archive for git repository under the quota limitation.
 

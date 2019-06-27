@@ -1,0 +1,10 @@
+**
+
+!docker-entry.sh
+!git_archiver.py
+!requirements.txt
+!setup.py
+
+!assets/
+
+**/*.pyc

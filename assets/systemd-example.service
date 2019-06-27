@@ -1,0 +1,25 @@
+[Unit]
+Description=git-archiver instancce
+
+After=docker.service
+Requires=docker.service
+
+
+[Service]
+Restart=always
+RestartSec=10
+
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull pjknkda/git-archiver:latest
+ExecStartPre=-/usr/bin/docker kill git-archiver
+ExecStartPre=-/usr/bin/docker rm git-archiver
+ExecStart=/usr/bin/docker run --name git-archiver \
+                              -v /tmp:/tmp \
+                              -v /var/run/docker.sock:/var/run/docker.sock \
+                              pjknkda/git-archiver:latest
+
+ExecStop=/usr/bin/docker stop git-archiver
+
+
+[Install]
+WantedBy=multi-user.target

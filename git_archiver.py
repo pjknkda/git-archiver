@@ -34,8 +34,10 @@ WORKER_CMD_TEMPLATE = '''
 #!/bin/bash
 
 set -ex
-git clone {clone_options} {repo} /tmpfs_mnt
-zip -r {archive_filename} /tmpfs_mnt
+git clone {clone_options} '{repo}' /tmpfs_mnt
+pushd /tmpfs_mnt
+zip -r ../{archive_filename} *
+popd
 chmod 777 {archive_filename}
 '''.strip()
 

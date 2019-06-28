@@ -19,6 +19,7 @@ GIT_ARCHIVER_MAX_DISK_QUOTA = int(os.getenv('GIT_ARCHIVER_MAX_DISK_QUOTA', 50 * 
 GIT_ARCHIVER_DOCKER_URI = os.getenv('GIT_ARCHIVER_DOCKER_URI', 'unix://var/run/docker.sock')
 GIT_ARCHIVER_DOCKER_WORKER_IMAGE = os.getenv('GIT_ARCHIVER_DOCKER_WORKER_IMAGE', 'elice/git-and-zip:alpine')
 GIT_ARCHIVER_TIMEOUT = int(os.getenv('GIT_ARCHIVER_TIMEOUT', 60))
+GIT_ARCHIVER_ACCESS_KEY = os.getenv('GIT_ARCHIVER_ACCESS_KEY', '')
 
 app = web.Application()
 app_routes = web.RouteTableDef()
@@ -41,6 +42,10 @@ chmod 777 {archive_filename}
 
 @app_routes.get('/archive')
 async def archive_get_routing(request: web.Request) -> web.StreamResponse:
+    if (GIT_ARCHIVER_ACCESS_KEY
+            and request.headers.get('Authorization', '') != 'Bearer %s' % GIT_ARCHIVER_ACCESS_KEY):
+        return web.HTTPUnauthorized()
+
     try:
         repo = request.query['repo'].strip()
         clone_options = request.query.get('clone_options', '').strip()

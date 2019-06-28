@@ -20,6 +20,7 @@ These configuration keys can be passed through environment variables.
 - GIT_ARCHIVER_DOCKER_WORKER_IMAGE : Docker image to be used in worker containers. `bash`, `git`, and `zip` command should be avilable. (default: `elice/alpine-bash-git-zip:latest`)
 - GIT_ARCHIVER_MAX_DISK_QUOTA : Maximum allowed disk quota for repos in bytes. (default: `50MB`)
 - GIT_ARCHIVER_TIMEOUT : Maximum allowed time for cloning and archiving in seconds. (default: `60`)
+- GIT_ARCHIVER_ACCESS_KEY : A string to be used in bearer token based autohization. (default: ``)
 
 
 ## API

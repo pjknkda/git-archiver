@@ -7,7 +7,7 @@
 aiohttp==3.5.4
 async-timeout==3.0.1      # via aiohttp
 attrs==19.1.0             # via aiohttp
-certifi==2019.6.16        # via requests
+certifi==2022.12.7        # via requests
 chardet==3.0.4            # via aiohttp, requests
 docker==4.0.2
 idna==2.8                 # via requests, yarl
